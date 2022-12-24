@@ -97,7 +97,7 @@ fn main() {
             }
         }
     }
-
+    
     println!("best scenic score: {best_scenic_score}");
 }
 

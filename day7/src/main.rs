@@ -36,14 +36,14 @@ impl StorageItem {
         if let Some(ref children) = base_mut_borrowed.children {
             let file_size = file_size.parse().unwrap();
 
-            let new_directory = StorageItem {
+            let new_file = StorageItem {
                 parent: Rc::downgrade(&base),
                 name: file_name.to_string(),
                 size: file_size,
                 children: None
             };
 
-            children.borrow_mut().push(Rc::new(RefCell::new(new_directory)));
+            children.borrow_mut().push(Rc::new(RefCell::new(new_file)));
 
             // Recursively add the size upwards the tree
             base_mut_borrowed.add_size(file_size);
