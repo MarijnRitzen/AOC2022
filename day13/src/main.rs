@@ -71,26 +71,7 @@ impl Ord for Packet {
 
 impl PartialOrd for Packet {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        match (self, other) {
-            (Packet::List(left), Packet::List(right)) => {
-                for index in 0..std::cmp::min(left.len(), right.len()) {
-                    match left[index].partial_cmp(&right[index]) {
-                        Some(std::cmp::Ordering::Equal) => continue,
-                        None => unreachable!(),
-                        other => return other,
-                    }
-                }
-
-                Some(left.len().cmp(&right.len()))
-            }
-            (Packet::List(left), Packet::Number(right)) => {
-                Packet::List(left.to_vec()).partial_cmp(&Packet::List(vec![Packet::Number(*right)]))
-            }
-            (Packet::Number(left), Packet::List(right)) => {
-                Packet::List(vec![Packet::Number(*left)]).partial_cmp(&Packet::List(right.to_vec()))
-            }
-            (Packet::Number(left), Packet::Number(right)) => Some(left.cmp(right)),
-        }
+        Some(self.cmp(other))
     }
 }
 
