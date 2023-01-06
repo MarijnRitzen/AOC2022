@@ -181,56 +181,56 @@ mod tests {
     #[test]
     fn test_sorting_1() {
         assert_eq!(
-            Packet::parse("[1,1,3,1,1]").partial_cmp(&Packet::parse("[1,1,5,1,1]")),
-            Some(std::cmp::Ordering::Less)
+            Packet::parse("[1,1,3,1,1]").cmp(&Packet::parse("[1,1,5,1,1]")),
+            std::cmp::Ordering::Less
         );
     }
 
     #[test]
     fn test_sorting_2() {
         assert_eq!(
-            Packet::parse("[[1],[2,3,4]]").partial_cmp(&Packet::parse("[[1],4]")),
-            Some(std::cmp::Ordering::Less)
+            Packet::parse("[[1],[2,3,4]]").cmp(&Packet::parse("[[1],4]")),
+            std::cmp::Ordering::Less
         );
     }
 
     #[test]
     fn test_sorting_3() {
         assert_eq!(
-            Packet::parse("[9]").partial_cmp(&Packet::parse("[[8,7,6]]")),
-            Some(std::cmp::Ordering::Greater)
+            Packet::parse("[9]").cmp(&Packet::parse("[[8,7,6]]")),
+            std::cmp::Ordering::Greater
         );
     }
 
     #[test]
     fn test_sorting_4() {
         assert_eq!(
-            Packet::parse("[[4,4],4,4]").partial_cmp(&Packet::parse("[[4,4],4,4,4]")),
-            Some(std::cmp::Ordering::Less)
+            Packet::parse("[[4,4],4,4]").cmp(&Packet::parse("[[4,4],4,4,4]")),
+            std::cmp::Ordering::Less
         );
     }
 
     #[test]
     fn test_sorting_5() {
         assert_eq!(
-            Packet::parse("[7,7,7,7]").partial_cmp(&Packet::parse("[7,7,7]")),
-            Some(std::cmp::Ordering::Greater)
+            Packet::parse("[7,7,7,7]").cmp(&Packet::parse("[7,7,7]")),
+            std::cmp::Ordering::Greater
         );
     }
 
     #[test]
     fn test_sorting_6() {
         assert_eq!(
-            Packet::parse("[]").partial_cmp(&Packet::parse("[3]")),
-            Some(std::cmp::Ordering::Less)
+            Packet::parse("[]").cmp(&Packet::parse("[3]")),
+            std::cmp::Ordering::Less
         );
     }
 
     #[test]
     fn test_sorting_7() {
         assert_eq!(
-            Packet::parse("[[[]]]").partial_cmp(&Packet::parse("[[]]")),
-            Some(std::cmp::Ordering::Greater)
+            Packet::parse("[[[]]]").cmp(&Packet::parse("[[]]")),
+            std::cmp::Ordering::Greater
         );
     }
 
@@ -238,8 +238,8 @@ mod tests {
     fn test_sorting_8() {
         assert_eq!(
             Packet::parse("[1,[2,[3,[4,[5,6,7]]]],8,9]")
-                .partial_cmp(&Packet::parse("[1,[2,[3,[4,[5,6,0]]]],8,9]")),
-            Some(std::cmp::Ordering::Greater)
+                .cmp(&Packet::parse("[1,[2,[3,[4,[5,6,0]]]],8,9]")),
+            std::cmp::Ordering::Greater
         );
     }
 
